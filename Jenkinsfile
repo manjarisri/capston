@@ -8,7 +8,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-        echo 'build'
+        sh 'docker build -t todo .'
       }
     } 
   }       
