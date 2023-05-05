@@ -36,7 +36,9 @@ pipeline {
       stage('deploy to k8s'){
 	      steps{
 	        withCredentials([file(credentialsId: 'minikubeconf', variable: 'ms')]) {
-	           sh 'kubectl --kubeconfig=$ms get pods'            
+	           sh 'kubectl --kubeconfig=$ms get pods'  
+	           sh 'kubectl --kubeconfig=$ms apply -f dep.yaml'
+                   sh 'kubectl --kubeconfig=$ms set image deployment/my-dep todo=manjarisri/todo:$BUILD_NUMBER'
                  }  
               }       
        }
