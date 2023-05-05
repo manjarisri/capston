@@ -37,9 +37,9 @@ pipeline {
 	      steps{
 	        withCredentials([file(credentialsId: 'minikubeconf', variable: 'ms')]) {
 	           sh 'kubectl --kubeconfig=$ms get pods'            
-               }  
-
-       }       
- }
+                 }  
+              }       
+       }
     
     }
+}
