@@ -1,8 +1,9 @@
 pipeline {
     agent any
-    environment {     
-        DOCKERHUB_CREDENTIALS= ([string(credentialsId: 'manjarirsri', password: 'Manjari04')])  
-    } 
+    environment {
+      usr = 'manjarisri'
+      pass = 'Manjari04'
+    }
     stages {
        stage("Git Checkout"){           
          steps{                
@@ -26,10 +27,12 @@ pipeline {
       }  
       stage('Pushnig image to dockerhub') {         
          steps{   
-            sh 'docker login -u manjarisri -p ${Manjari04}' 
+            withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'pass', usernameVariable: 'usr')]){
+            sh 'docker login -u $usr -p $pass' 
             sh 'docker push manjarisri/todo:$BUILD_NUMBER'       
          }            
-      } 
+	 } 
+      }
         
         
 
