@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {     
-        DOCKERHUB_CREDENTIALS= credentials(dockrehubid: "manjarisri", password: "Manjari04")     
+        DOCKERHUB_CREDENTIALS= credentials(dockrehubid: 'manjarisri', password: 'Manjari04')     
     } 
     stages {
       stage('Checkout') {
