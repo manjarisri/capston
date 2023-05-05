@@ -6,7 +6,7 @@ pipeline {
            checkout scm
          }
       }
-      stage('Build1') {
+      stage('Build') {
          steps {
            sh 'docker build -t todo .'
          }
