@@ -1,14 +1,14 @@
 pipeline {
     agent any
     environment {     
-        DOCKERHUB_CREDENTIALS= credentials(dockrehubid: 'manjarisri', password: 'Manjari04')     
+        DOCKERHUB_CREDENTIALS= ([string(credentialsId: 'manjarirsri', password: 'Manjari04')])  
     } 
     stages {
-      stage('Checkout') {
-         steps {
-           checkout scm
-         }
-      }
+       stage("Git Checkout"){           
+         steps{                
+	       git branch: 'development', url: 'https://github.com/manjarisri/capston'                 
+         }        
+    }
       stage('Building stage') {
          steps {
            sh 'docker build -t manjarisri/todo:$BUILD_NUMBER .'
