@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: my-dep
+ labels:
+   env: front-end
+spec:
+  selector:
+   matchLabels:
+    env: front-end
+  template:
+    metadata:
+      name: dep-pod
+      labels:
+        env: front-end
+    spec:
+      containers:
+      - name: dep-con
+        image: manjarisri/todo:31
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webs
+spec:
+  type: NodePort
+  ports:
+     - targetPort: 5000
+       port: 5000
+  selector:
+      env: front-end
