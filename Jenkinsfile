@@ -36,14 +36,10 @@ pipeline {
       stage('deploy to k8s'){
 	      steps{
 	        withCredentials([file(credentialsId: 'minikubeconf', variable: 'ms')]) {
-		sh 'kubectl get pods'
-	}
-         }    
-	    
-      }
-		    
-        
+	           sh 'kubectl --kubeconfig=$ms get pods'            
+               }  
 
-    }       
+       }       
  }
     
+    }
