@@ -1,8 +1,9 @@
 pipeline {
     agent any
-    environment {     
-        DOCKERHUB_CREDENTIALS= ([string(credentialsId: 'manjarirsri', password: 'Manjari04')])  
-    } 
+    environment {
+      usr = 'manjarisri'
+      pass = 'Manjari04'
+    }
     stages {
        stage("Git Checkout"){           
          steps{                
@@ -26,13 +27,20 @@ pipeline {
       }  
       stage('Pushnig image to dockerhub') {         
          steps{   
-            sh 'docker login -u manjarisri -p ${Manjari04}' 
+            withCredentials([usernamePassword(credentialsId: 'dockerhubcred', passwordVariable: 'pass', usernameVariable: 'usr')]){
+            sh 'docker login -u $usr -p $pass' 
             sh 'docker push manjarisri/todo:$BUILD_NUMBER'       
          }            
-      } 
-        
-        
-
-    }       
- }
+	 } 
+      }
+      stage('deploy to k8s'){
+	      steps{
+	        withCredentials([file(credentialsId: 'minikubeconf', variable: 'ms')]) {
+	           sh 'kubectl --kubeconfig=$ms apply -f dep.yaml'
+                   sh 'kubectl --kubeconfig=$ms set image deployment/my-dep dep-con=manjarisri/todo:$BUILD_NUMBER'
+                 }  
+              }       
+       }
     
+    }
+}
