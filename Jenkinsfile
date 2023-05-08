@@ -4,12 +4,12 @@ pipeline {
       usr = 'manjarisri'
       pass = 'Manjari04'
     }
-    stages {
-       stage("Git Checkout"){           
-         steps{                
-	       git branch: 'development', url: 'https://github.com/manjarisri/capston'                 
-         }        
-    }
+//     stages {
+//        stage("Git Checkout"){           
+//          steps{                
+// 	       git branch: 'development', url: 'https://github.com/manjarisri/capston'                 
+//          }        
+//     }
       stage('Building') {
          steps {
            sh 'docker build -t manjarisri/todo:$BUILD_NUMBER .'
