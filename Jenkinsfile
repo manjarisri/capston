@@ -10,7 +10,7 @@ pipeline {
 	       git branch: 'development', url: 'https://github.com/manjarisri/capston'                 
          }        
     }
-      stage('Buildings') {
+      stage('Buildingstage') {
          steps {
            sh 'docker build -t manjarisri/todo:$BUILD_NUMBER .'
          }
