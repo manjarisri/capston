@@ -33,7 +33,7 @@ pipeline {
          }            
 	 } 
       }
-//       stage('deploy to k8s'){
+//       stage('deployment'){
 // 	      steps{
 // 	        withCredentials([file(credentialsId: 'minikubeconf', variable: 'ms')]) {
 // 	           sh 'kubectl --kubeconfig=$ms apply -f dep.yaml'
