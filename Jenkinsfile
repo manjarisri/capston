@@ -33,14 +33,14 @@ pipeline {
          }            
 	 } 
       }
-//       stage('deploy to k8s'){
-// 	      steps{
-// 	        withCredentials([file(credentialsId: 'minikubeconf', variable: 'ms')]) {
-// 	           sh 'kubectl --kubeconfig=$ms apply -f dep.yaml'
-//                    sh 'kubectl --kubeconfig=$ms set image deployment/my-dep dep-con=manjarisri/todo:$BUILD_NUMBER'
-//                  }  
-//               }       
-//        }
+      stage('deploy to k8s'){
+	      steps{
+	        withCredentials([file(credentialsId: 'minikubeconf', variable: 'ms')]) {
+	           sh 'kubectl --kubeconfig=$ms apply -f dep.yaml'
+                   sh 'kubectl --kubeconfig=$ms set image deployment/my-dep dep-con=manjarisri/todo:$BUILD_NUMBER'
+                 }  
+              }       
+       }
     
 	    
     }
